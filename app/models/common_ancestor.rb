@@ -1,0 +1,3 @@
+class CommonAncestor
+
+end
