@@ -4,7 +4,8 @@ describe CommonAncestor, type: :model do
   end
 
   describe "run" do
-    let(:common_ancestor) { CommonAncestor.new(node_a: node_a, node_b: node_b) }
+    let(:nodes) { Nodes.new(file_path: "./spec/data/nodes.csv") }
+    let(:common_ancestor) { CommonAncestor.new(nodes: nodes, node_a: node_a, node_b: node_b) }
     before(:each) { common_ancestor.run }
 
     # /common_ancestor?a=5497637&b=2820230 should return
