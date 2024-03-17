@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ $1 == 'app' ]]; then
+  docker-compose -f compose.yml -p code-challenge up --build
+
+elif [[ $1 == 'test' ]]; then
+  docker-compose -f compose.yml -f compose-test.yml -p code-challenge-test up --build
+
+else
+echo "How to use this script:
+./run app   -  Run the application.
+./run test  -  Run the rspec tests.
+./run       -  See this help dialog."
+fi
