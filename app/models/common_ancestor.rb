@@ -11,16 +11,41 @@ class CommonAncestor
   end
 
   def run
+    if node_a == node_b
+      _compute_single_node
+    elsif node_a != nil && node_b != nil
+      _compute_multi_node
+    end
+  end
+
+  def data
+    {
+      root_id: _to_i(root_id),
+      lowest_common_ancestor: _to_i(lowest_common_ancestor),
+      depth: depth
+    }
+  end
+
+  private
+
+  def _compute_single_node
+    _node_a_ancestors = nodes.all_parents(node_a)
+    @lowest_common_ancestor = node_a
+    @depth = _node_a_ancestors.length + 1
+    @root_id = _node_a_ancestors.last
+  end
+
+  def _compute_multi_node
     # get the ancestor list for node_a
     _node_a_ancestors = nodes.all_parents(node_a)
     # walk backwards through ancestor list for node_b
     _node_b_parent_id = node_b
     while _node_b_parent_id != nil # stop at the root node
       # exit condition: the current (node_b) parent is in the ancestor list for node_a
-      if _node_a_ancestors.include?(_node_b_parent_id)
-        @root_id = _node_a_ancestors.last
+      if _node_a_ancestors.include?(_node_b_parent_id) # todo: optimize
         @lowest_common_ancestor = _node_b_parent_id
-        @depth = _node_a_ancestors.reverse.find_index(lowest_common_ancestor) + 1
+        @root_id = _node_a_ancestors.last
+        @depth = _node_a_ancestors.reverse.find_index(lowest_common_ancestor) + 1 # todo: optimize
         break
       end
       # find the next parent id
@@ -28,11 +53,8 @@ class CommonAncestor
     end
   end
 
-  def data
-    {
-      root_id: root_id.to_i,
-      lowest_common_ancestor: lowest_common_ancestor.to_i,
-      depth: depth
-    }
+  # don't convert nil to 0
+  def _to_i(value)
+    value.to_i if value != nil
   end
 end
