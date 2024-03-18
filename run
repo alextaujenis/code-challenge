@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $1 == 'app' ]]; then
-  docker-compose -f compose.yml -p code-challenge up --build
+  docker-compose -f compose.yml -f compose-ports.yml -p code-challenge up --build
 
 elif [[ $1 == 'test' ]]; then
   docker-compose -f compose.yml -f compose-test.yml -p code-challenge-test up --build
