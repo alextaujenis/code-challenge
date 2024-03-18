@@ -11,6 +11,7 @@ class Nodes
     _hash_data
   end
 
+  # lookup time: O(log n)
   def find_parent(child_id)
     _hash_data[child_id]
   end
@@ -28,7 +29,7 @@ class Nodes
   private
 
   def _hash_data
-    @__hash_data ||= Hash[*_csv_data.flatten]
+    @__hash_data ||= _csv_data.to_h
   end
 
   def _csv_data
