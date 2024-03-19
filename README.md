@@ -49,12 +49,16 @@ Faker. This challenge was completed in chunks when my free-time allowed.
 ## Endpoints
 
 ### Common Ancestor
-Request: GET `/common_ancestor?a=5497637&b=2820230`
-Response: json `{"root_id": 130, "lowest_common_ancestor": 125, "depth": 2}`
+
+*Request*: GET `/common_ancestor?a=5497637&b=2820230`
+
+*Response*: json `{"root_id": 130, "lowest_common_ancestor": 125, "depth": 2}`
 
 ### Birds
-Request: POST `/birds` json params `{ "node_ids": [ 1, 2, 3 ] }`
-Response: json `{ "bird_ids": [ 4, 5, 6 ] }`
+
+*Request*: POST `/birds` json params `{ "node_ids": [ 1, 2, 3 ] }`
+
+*Response*: json `{ "bird_ids": [ 4, 5, 6 ] }`
 
 ## Getting Started
 
