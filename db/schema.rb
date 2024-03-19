@@ -13,24 +13,18 @@
 ActiveRecord::Schema[7.1].define(version: 2024_03_19_012206) do
   create_table "birds", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_birds_on_name", unique: true
   end
 
   create_table "birds_nodes", force: :cascade do |t|
     t.integer "bird_id", null: false
     t.integer "node_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["bird_id"], name: "index_birds_nodes_on_bird_id"
     t.index ["node_id"], name: "index_birds_nodes_on_node_id"
   end
 
   create_table "nodes", force: :cascade do |t|
     t.integer "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_nodes_on_parent_id"
   end
 
