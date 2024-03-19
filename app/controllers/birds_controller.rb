@@ -1,5 +1,7 @@
 class BirdsController < ApplicationController
   def search
-    render json: { bird_ids: [ 2, 3, 4, 5 ] }
+    all_node_ids = Node.all_children(Bst.new(), params.require(:node_ids))
+    all_bird_ids = Bird.includes(:nodes).where(nodes: { id: all_node_ids }).pluck(:id).uniq
+    render json: { bird_ids: all_bird_ids }
   end
 end
