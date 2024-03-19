@@ -1,4 +1,4 @@
-class Node < ActiveRecord::Base
+class Node < ApplicationRecord
   belongs_to :parent_node, class_name: 'Node', foreign_key: 'parent_id', optional: true
   has_and_belongs_to_many :birds
 

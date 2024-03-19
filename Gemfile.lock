@@ -88,6 +88,8 @@ GEM
     diff-lcs (1.5.1)
     drb (2.2.1)
     erubi (1.12.0)
+    faker (3.2.3)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
@@ -207,6 +209,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   csv
+  faker
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.2)
   rspec-rails

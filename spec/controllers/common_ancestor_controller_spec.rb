@@ -1,5 +1,5 @@
 describe CommonAncestorController, type: :request do
-  describe "GET #index" do
+  describe "GET /common_ancestor" do
     let!(:node_130) { Node.create!(id: 130) }
     let!(:node_125) { Node.create!(id: 125, parent_id: 130) }
     let!(:node_2820230) { Node.create!(id: 2820230, parent_id: 125) }
