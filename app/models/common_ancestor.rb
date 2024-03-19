@@ -10,7 +10,7 @@ class CommonAncestor
   end
 
   def run
-    if node_a != nil && node_b != nil
+    if node_a.present? && node_b.present?
       if node_a == node_b
         _compute_single_node
       else
@@ -43,7 +43,7 @@ class CommonAncestor
     _node_a_ancestors_bst = Bst.new(_node_a_ancestors.map(&:id))
     # walk backwards through ancestor list for node_b
     _node_b_parent = node_b
-    while _node_b_parent != nil # stop at the root node
+    while _node_b_parent.present? # stop at the root node
       # exit condition: the current (node_b) parent is in the ancestor list for node_a
       if _node_a_ancestors_bst.include?(_node_b_parent.id) # optimized: O(log n)
         @lowest_common_ancestor = _node_b_parent.id

@@ -5,7 +5,7 @@ class Node < ApplicationRecord
   def all_parents
     _all_nodes = []
     _current_node = parent_node
-    while _current_node != nil # stop at the root node
+    while _current_node.present? # stop at the root node
       _all_nodes.push(_current_node)
       _current_node = _current_node.parent_node
     end
@@ -24,7 +24,8 @@ class Node < ApplicationRecord
     # find the new child ids
     child_ids = Node.where(parent_id: child_ids).pluck(:id)
     if child_ids.empty?
-      return parent_ids.all
+      # recursive exit
+      parent_ids.all
     else
       all_children_ids(parent_ids, child_ids)
     end

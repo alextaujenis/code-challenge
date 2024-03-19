@@ -1,3 +1,5 @@
+# This allows O(log n) lookup time for array.include?
+# This should be converted to a Ruby "set" instead
 class Bst
   def initialize(data=[])
     @_data = {}
