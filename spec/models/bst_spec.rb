@@ -24,5 +24,20 @@ describe Bst, type: :model do
         end
       end
     end
+
+    describe "all" do
+      it "returns the input array" do
+        expect(bst.all).to match_array(input_array)
+      end
+    end
+
+    describe "insert" do
+      let(:data) { [ 10, 11, 12 ] }
+      before(:each) { bst.insert(data) }
+
+      it "inserts the items into the collection" do
+        expect(bst.all).to match_array(input_array + data)
+      end
+    end
   end
 end
