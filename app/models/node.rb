@@ -12,11 +12,11 @@ class Node < ApplicationRecord
     _all_nodes
   end
 
-  # HOW TO USE: all_children(nil, node_ids)
+  # HOW TO USE: all_children_ids(nil, node_ids)
   # 1. move the children to the parents collection
   # 2. find the children of the parents
   # 3. return all parents when there are no more children
-  def self.all_children(parent_ids = Bst.new, child_ids = [])
+  def self.all_children_ids(parent_ids = Bst.new, child_ids = [])
     # remove parent nodes that have been processed from the child nodes
     child_ids = child_ids - parent_ids.all
     # store the child ids in a unique hash
@@ -26,7 +26,7 @@ class Node < ApplicationRecord
     if child_ids.empty?
       return parent_ids.all
     else
-      all_children(parent_ids, child_ids)
+      all_children_ids(parent_ids, child_ids)
     end
   end
 end
