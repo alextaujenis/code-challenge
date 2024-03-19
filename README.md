@@ -10,8 +10,10 @@ nodes.
 
 ## The Solution
 
-Both problems require quick graph-traversal so this solution relies upon
-database indexes to achieve O(log n) lookup time when navigating the graph.
+Both problems require quick graph-traversal and list lookup so this solution
+relies upon database indexes to achieve O(log n) lookup time when navigating
+the graph, and O(log n) lookup time with binary trees when searching for an
+item within a list.
 
 The first problem can be solved by walking up the tree from the first node to
 the root. The nodes are appended to an array (an ordered list to find depth)
@@ -19,16 +21,16 @@ and a binary search tree (for quick lookup/comparison). Once the root node is
 reached, the process begins walking up the tree for the second node. Each time
 it finds the parent it checks if that node is included in the tree of the first
 node, and exits when it finds a match. This method minimizes the total number
-of graph lookups to h_root(node_a) + h_lca(node_b), or the height of the tree from
-node a to the root plus the height of the tree from node b to the lowest common
-ancestor.
+of graph lookups to h_root(node_a) + h_lca(node_b), or the height of the tree
+from node a to the root plus the height of the tree from node b to the lowest
+common ancestor.
 
 The second problem of finding all children for a list of nodes (and subsequently
 the related birds) can be solved by recursively asking "who are your children"
 and returning all unique values when no more children are found. Children that
 have already been processed are removed on each iteration to make sure each
-path is traversed only once. With a list of unique node_ids it takes a simple
-(optimized) SQL query to return all associated birds.
+path is traversed only once. Then all birds are returned with bulk node id SQL
+query.
 
 ## Design
 
