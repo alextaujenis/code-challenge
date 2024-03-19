@@ -1,9 +1,8 @@
 class CommonAncestorController < ApplicationController
   def search
     common_ancestor = CommonAncestor.new({
-      nodes: CodeChallenge::Application.config.nodes,
-      node_a: params.require(:a),
-      node_b: params.require(:b)
+      node_a: Node.find(params.require(:a).to_i),
+      node_b: Node.find(params.require(:b).to_i)
     })
     common_ancestor.run
 

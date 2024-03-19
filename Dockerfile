@@ -15,4 +15,7 @@ RUN bundle install
 COPY . .
 
 EXPOSE 3000
+
+ENTRYPOINT [ "/usr/src/app/bin/docker-entrypoint" ]
+
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

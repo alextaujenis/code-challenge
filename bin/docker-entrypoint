@@ -1,8 +1,19 @@
 #!/bin/bash -e
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
+# Create the database (if it doesn't exist)
+if [ ! -f ./storage/${RAILS_ENV}.sqlite3 ]; then
+  echo "Creating database..."
+  ./bin/rails db:create
+fi
+
+# Migrate the database
+echo "Migrating database..."
+./bin/rails db:migrate
+
+# Seed the database (only in development)
+if [[ $RAILS_ENV == 'development' ]]; then
+  echo "Seeding database..."
+  ./bin/rails db:seed
 fi
 
 exec "${@}"

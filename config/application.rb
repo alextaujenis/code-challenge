@@ -28,10 +28,5 @@ module CodeChallenge
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-
-    # read the nodes data into memory upon start
-    config.after_initialize do
-      config.nodes = Nodes.new(file_path: "./data/nodes.csv")
-    end
   end
 end

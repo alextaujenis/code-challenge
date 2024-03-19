@@ -4,3 +4,6 @@ services:
     build: .
     volumes:
       - .:/usr/src/app:cached
+    environment:
+      ENV: development
+      RAILS_ENV: development

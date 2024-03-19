@@ -2,3 +2,6 @@ version: '3.7'
 services:
   app:
     command: bundle exec rspec --format doc
+    environment:
+      ENV: test
+      RAILS_ENV: test
