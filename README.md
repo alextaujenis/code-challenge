@@ -46,13 +46,23 @@ database, and the /birds endpoint was finished.
 The final solution leverages a Ruby on Rails API, SQLite, Docker, Rspec, and
 Faker. This challenge was completed in chunks when my free-time allowed.
 
+## Endpoints
+
+### Common Ancestor
+Request: GET `/common_ancestor?a=5497637&b=2820230`
+Response: json `{"root_id": 130, "lowest_common_ancestor": 125, "depth": 2}`
+
+### Birds
+Request: POST `/birds` json params `{ "node_ids": [ 1, 2, 3 ] }`
+Response: json `{ "bird_ids": [ 4, 5, 6 ] }`
+
 ## Getting Started
 
 This application can be started via Docker by executing the command:
 
 `./run app`
 
-The unit tests can be run via Docker with:
+The test suite can be run via Docker with:
 
 `./run test`
 
@@ -64,6 +74,7 @@ This application is a proof-of-concept code-challenge, so many decisions were
 made to reduce the scope and deliver a complete solution within the allotted
 time. Here are the things that were considered but saved for later.
 
+- [ ] Seed the database with birds
 - [ ] Provide descriptive errors for each endpoint
 - [ ] Implement RuboCop for project linting
 - [ ] Implement Simplecov for test coverage
