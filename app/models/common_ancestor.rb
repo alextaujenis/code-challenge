@@ -1,12 +1,12 @@
 class CommonAncestor
-  attr_reader :node_a, :node_b, :root_id, :lowest_common_ancestor, :depth
+  attr_accessor :node_a, :node_b, :root_id, :lowest_common_ancestor, :depth
 
-  def initialize(opts={})
-    @node_a = opts[:node_a]
-    @node_b = opts[:node_b]
-    @root_id = nil
-    @lowest_common_ancestor = nil
-    @depth = nil
+  def initialize(node_a, node_b)
+    node_a = node_a
+    node_b = node_b
+    root_id = nil
+    lowest_common_ancestor = nil
+    depth = nil
   end
 
   def run
@@ -31,9 +31,9 @@ class CommonAncestor
 
   def _compute_single_node
     _node_a_ancestors = node_a.all_parents
-    @lowest_common_ancestor = node_a.id
-    @depth = _node_a_ancestors.length + 1
-    @root_id = _node_a_ancestors.last.id
+    lowest_common_ancestor = node_a.id
+    depth = _node_a_ancestors.length + 1
+    root_id = _node_a_ancestors.last.id
   end
 
   def _compute_multi_node
@@ -46,9 +46,9 @@ class CommonAncestor
     while _node_b_parent.present? # stop at the root node
       # exit condition: the current (node_b) parent is in the ancestor list for node_a
       if _node_a_ancestors_set.include?(_node_b_parent.id) # optimized: O(log n)
-        @lowest_common_ancestor = _node_b_parent.id
-        @root_id = _node_a_ancestors.last.id
-        @depth = _node_a_ancestors.length - _node_a_ancestors.index(_node_b_parent) # find the (reversed) tree depth
+        lowest_common_ancestor = _node_b_parent.id
+        root_id = _node_a_ancestors.last.id
+        depth = _node_a_ancestors.length - _node_a_ancestors.index(_node_b_parent) # find the (reversed) tree depth
         break
       end
       # find the next parent

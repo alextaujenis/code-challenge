@@ -1,8 +1,8 @@
 class CommonAncestorController < ApplicationController
   def search
-    common_ancestor = CommonAncestor.new({
-      node_a: Node.find(params.require(:a).to_i),
-      node_b: Node.find(params.require(:b).to_i)
+    common_ancestor = CommonAncestor.new(
+      Node.find(params.require(:a)),
+      Node.find(params.require(:b))
     })
     common_ancestor.run
 
