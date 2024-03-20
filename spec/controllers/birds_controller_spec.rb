@@ -1,6 +1,6 @@
 # not ready for factories...
 def bird_name
-  Faker::Creature::Bird.implausible_common_name
+  Faker::Creature::Bird.plausible_common_name
 end
 
 describe BirdsController, type: :request do

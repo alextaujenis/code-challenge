@@ -13,8 +13,8 @@ describe Node, type: :model do
   end
 
   describe "with many birds" do
-    let!(:bird1) { Bird.create(name: Faker::Creature::Bird.implausible_common_name) }
-    let!(:bird2) { Bird.create(name: Faker::Creature::Bird.implausible_common_name) }
+    let!(:bird1) { Bird.create(name: Faker::Creature::Bird.plausible_common_name) }
+    let!(:bird2) { Bird.create(name: Faker::Creature::Bird.plausible_common_name) }
     let!(:node) { Node.create(id: 1, birds: birds) }
     let(:birds) { [ bird1, bird2 ] }
 

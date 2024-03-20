@@ -4,7 +4,7 @@ describe Bird, type: :model do
   end
 
   describe "valid?" do
-    let(:name) { Faker::Creature::Bird.implausible_common_name }
+    let(:name) { Faker::Creature::Bird.plausible_common_name }
     let(:bird) { Bird.new(name: name) }
     subject { bird.valid? }
 
@@ -34,7 +34,7 @@ describe Bird, type: :model do
   describe "with many nodes" do
     let!(:node1) { Node.create(id: 1) }
     let!(:node2) { Node.create(id: 2, parent_id: 1) }
-    let!(:bird) { Bird.create(name: Faker::Creature::Bird.implausible_common_name, nodes: nodes) }
+    let!(:bird) { Bird.create(name: Faker::Creature::Bird.plausible_common_name, nodes: nodes) }
     let(:nodes) { [ node1, node2 ] }
 
     it "has many nodes" do

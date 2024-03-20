@@ -59,7 +59,7 @@ The test suite can be run via Docker with:
 
 ## Endpoints
 
-### Common Ancestor
+### * Common Ancestor
 
 *Request*: GET `/common_ancestor?a=2138692&b=1045178`
 
@@ -71,21 +71,19 @@ The test suite can be run via Docker with:
 
 *Response*: json `{"root_id":1045177,"lowest_common_ancestor":1045178,"depth":2}`
 
-### Birds
+### * Birds
 
-*Request*: POST `/birds` json params `{ "node_ids": [ 1, 2, 3 ] }`
+*Request*: POST `/birds` json params `{ "node_ids": [ 2138692, 2138651, 1045178 ] }`
 
 *Example*:
 ```
   curl --header "Content-Type: application/json" \
     --request POST \
-    --data '{"node_ids":[1,2,3]}' \
+    --data '{"node_ids":[2138692,2138651,1045178]}' \
     "http://localhost:3000/birds"
 ```
 
-*Response*: json `{ "bird_ids": [ 4, 5, 6 ] }`
-
-* *Note: Birds must be created in the database for this endpoint to return data.*
+*Response*: json `{"bird_ids":[1,2,3,5]}`
 
 ## Todo
 
