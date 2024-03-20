@@ -91,7 +91,6 @@ This application is a proof-of-concept code-challenge, so many decisions were
 made to reduce the scope and deliver a complete solution within the allotted
 time. Here are the things that were considered but saved for later.
 
-- [ ] Seed the database with birds
 - [ ] Provide descriptive errors for each endpoint
 - [ ] Implement RuboCop for project linting
 - [ ] Implement Simplecov for test coverage
