@@ -50,7 +50,7 @@ describe Node, type: :model do
       let(:expected_data) { [ 4, 5, 6, 7, 8 ] }
 
       it "returns all children ids" do
-        expect(Node.all_children_ids(Bst.new, [ 4, 7 ])).to match_array(expected_data)
+        expect(Node.all_children_ids(Set.new, Set[ 4, 7 ])).to match_array(expected_data)
       end
     end
   end

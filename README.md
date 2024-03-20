@@ -86,4 +86,3 @@ time. Here are the things that were considered but saved for later.
 - [ ] Implement Simplecov for test coverage
 - [ ] Implement a test watcher to run specs upon save
 - [ ] Create recursive SQL instead of ruby
-- [ ] Convert the Bst into a Ruby set

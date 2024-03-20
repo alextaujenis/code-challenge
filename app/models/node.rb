@@ -16,16 +16,16 @@ class Node < ApplicationRecord
   # 1. move the children to the parents collection
   # 2. find the children of the parents
   # 3. return all parents when there are no more children
-  def self.all_children_ids(parent_ids = Bst.new, child_ids = [])
+  def self.all_children_ids(parent_ids=Set.new, child_ids=Set.new)
     # remove parent nodes that have been processed from the child nodes
-    child_ids = child_ids - parent_ids.all
+    child_ids = child_ids - parent_ids
     # store the child ids in a unique hash
-    parent_ids.insert(child_ids)
+    parent_ids.merge(child_ids)
     # find the new child ids
-    child_ids = Node.where(parent_id: child_ids).pluck(:id)
+    child_ids = Set.new(Node.where(parent_id: child_ids.to_a).pluck(:id))
     if child_ids.empty?
       # recursive exit
-      parent_ids.all
+      parent_ids.to_a
     else
       all_children_ids(parent_ids, child_ids)
     end
