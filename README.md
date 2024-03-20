@@ -45,6 +45,18 @@ database, and the /birds endpoint was finished.
 The final solution leverages a Ruby on Rails API, SQLite, Docker, Rspec, and
 Faker. This challenge was completed in chunks when my free-time allowed.
 
+## Getting Started
+
+This application can be started via Docker by executing the command:
+
+`./run app`
+
+The test suite can be run via Docker with:
+
+`./run test`
+
+* *Note: Docker Desktop must be installed to use the `./run` commands.*
+
 ## Endpoints
 
 ### Common Ancestor
@@ -74,18 +86,6 @@ Faker. This challenge was completed in chunks when my free-time allowed.
 *Response*: json `{ "bird_ids": [ 4, 5, 6 ] }`
 
 * *Note: Birds must be created in the database for this endpoint to return data.*
-
-## Getting Started
-
-This application can be started via Docker by executing the command:
-
-`./run app`
-
-The test suite can be run via Docker with:
-
-`./run test`
-
-* *Note: Docker Desktop must be installed to use the `./run` commands.*
 
 ## Todo
 
