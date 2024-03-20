@@ -12,8 +12,7 @@ nodes.
 
 Both problems require quick graph-traversal and list lookup so this solution
 relies upon database indexes to achieve O(log n) lookup time when navigating
-the graph, and O(log n) lookup time with binary trees when searching for an
-item within a list.
+the graph, and O(log n) lookup time when searching for an item within a set.
 
 The first problem can be solved by walking up the tree from the first node to
 the root. The nodes are appended to an array (an ordered list to find depth)

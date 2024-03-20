@@ -39,7 +39,7 @@ class CommonAncestor
   def _compute_multi_node
     # get the ancestor list for node_a
     _node_a_ancestors = node_a.all_parents
-    # create a binary search tree for optimal lookup
+    # create a ruby set for optimal lookup
     _node_a_ancestors_set = Set.new(_node_a_ancestors.map(&:id))
     # walk backwards through ancestor list for node_b
     _node_b_parent = node_b
