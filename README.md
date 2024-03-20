@@ -16,13 +16,12 @@ the graph, and O(log n) lookup time when searching for an item within a set.
 
 The first problem can be solved by walking up the tree from the first node to
 the root. The nodes are appended to an array (an ordered list to find depth)
-and a binary search tree (for quick lookup/comparison). Once the root node is
-reached, the process begins walking up the tree for the second node. Each time
-it finds the parent it checks if that node is included in the tree of the first
-node, and exits when it finds a match. This method minimizes the total number
-of graph lookups to h_root(node_a) + h_lca(node_b), or the height of the tree
-from node a to the root plus the height of the tree from node b to the lowest
-common ancestor.
+and a ruby set (for quick lookup/comparison). Once the root node is reached,
+the process begins walking up the tree for the second node. Each time it finds
+the parent it checks if that node is included in the tree of the first node,
+and exits when it finds a match. This method minimizes the total number of
+graph lookups to the height of the tree from node a to the root plus the height
+of the tree from node b to the lowest common ancestor.
 
 The second problem of finding all children for a list of nodes (and subsequently
 the related birds) can be solved by recursively asking "who are your children"
