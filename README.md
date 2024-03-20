@@ -27,8 +27,7 @@ The second problem of finding all children for a list of nodes (and subsequently
 the related birds) can be solved by recursively asking "who are your children"
 and returning all unique values when no more children are found. Children that
 have already been processed are removed on each iteration to make sure each
-path is traversed only once. Then all birds are returned with bulk node id SQL
-query.
+path is traversed only once. Then all birds are returned with a SQL join query.
 
 ## Design
 
@@ -50,15 +49,31 @@ Faker. This challenge was completed in chunks when my free-time allowed.
 
 ### Common Ancestor
 
-*Request*: GET `/common_ancestor?a=5497637&b=2820230`
+*Request*: GET `/common_ancestor?a=2138692&b=1045178`
 
-*Response*: json `{"root_id": 130, "lowest_common_ancestor": 125, "depth": 2}`
+*Example*:
+```
+  curl --header "Accept: application/json" \
+    "http://localhost:3000/common_ancestor?a=2138692&b=1045178"
+```
+
+*Response*: json `{"root_id":1045177,"lowest_common_ancestor":1045178,"depth":2}`
 
 ### Birds
 
 *Request*: POST `/birds` json params `{ "node_ids": [ 1, 2, 3 ] }`
 
+*Example*:
+```
+  curl --header "Content-Type: application/json" \
+    --request POST \
+    --data '{"node_ids":[1,2,3]}' \
+    "http://localhost:3000/birds"
+```
+
 *Response*: json `{ "bird_ids": [ 4, 5, 6 ] }`
+
+* *Note: Birds must be created in the database for this endpoint to return data.*
 
 ## Getting Started
 
