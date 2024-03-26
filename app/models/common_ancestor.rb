@@ -11,11 +11,7 @@ class CommonAncestor
 
   def run
     return unless node_a.present? && node_b.present?
-    if node_a == node_b
-      compute_single_node
-    else
-      compute_multi_node
-    end
+    node_a == node_b ? compute_single_node : compute_multi_node
   end
 
   def data
