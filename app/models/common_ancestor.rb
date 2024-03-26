@@ -30,25 +30,25 @@ class CommonAncestor
   private
 
   def _compute_single_node
-    _node_a_ancestors = node_a.all_parents
+    _node_a_ancestors = node_a.all_parent_ids
     @lowest_common_ancestor = node_a.id
     @depth = _node_a_ancestors.length + 1
-    @root_id = _node_a_ancestors.last.id
+    @root_id = _node_a_ancestors.last
   end
 
   def _compute_multi_node
     # get the ancestor list for node_a
-    _node_a_ancestors = node_a.all_parents
+    _node_a_ancestors = node_a.all_parent_ids
     # create a ruby set for optimal lookup
-    _node_a_ancestors_set = Set.new(_node_a_ancestors.map(&:id))
+    _node_a_ancestors_set = Set.new(_node_a_ancestors)
     # walk backwards through ancestor list for node_b
     _node_b_parent = node_b
     while _node_b_parent.present? # stop at the root node
       # exit condition: the current (node_b) parent is in the ancestor list for node_a
       if _node_a_ancestors_set.include?(_node_b_parent.id) # optimized: O(log n)
         @lowest_common_ancestor = _node_b_parent.id
-        @root_id = _node_a_ancestors.last.id
-        @depth = _node_a_ancestors.length - _node_a_ancestors.index(_node_b_parent) # find the (reversed) tree depth
+        @root_id = _node_a_ancestors.last
+        @depth = _node_a_ancestors.length - _node_a_ancestors.index(_node_b_parent.id) # find the (reversed) tree depth
         break
       end
       # find the next parent

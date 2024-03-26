@@ -1,11 +1,24 @@
 class CommonAncestorController < ApplicationController
   def search
-    common_ancestor = CommonAncestor.new({
-      node_a: Node.find(params.require(:a).to_i),
-      node_b: Node.find(params.require(:b).to_i)
-    })
-    common_ancestor.run
+    if a.present? && a > 0 && b.present? && b > 0
+      common_ancestor = CommonAncestor.new({
+        node_a: Node.find(a),
+        node_b: Node.find(b)
+      })
+      common_ancestor.run
+      render json: common_ancestor.data
+    else
+      render json: { error: "Required parameter(s) missing: ?a=1&b=2" }
+    end
+  end
 
-    render json: common_ancestor.data
+  private
+
+  def a
+    @_a ||= params[:a].try(:to_i)
+  end
+
+  def b
+    @_b ||= params[:b].try(:to_i)
   end
 end

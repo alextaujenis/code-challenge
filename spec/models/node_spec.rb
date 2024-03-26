@@ -37,6 +37,7 @@ describe Node, type: :model do
     let!(:node6) { Node.create(id: 6, parent_id: 5) }
     let!(:node7) { Node.create(id: 7, parent_id: 3) }
     let!(:node8) { Node.create(id: 8, parent_id: 7) }
+    let!(:node9) { Node.create(id: 9, parent_id: 8) }
 
     describe "all_parents" do
       let(:expected_data) { [ node4, node3, node2, node1 ] }
@@ -46,11 +47,28 @@ describe Node, type: :model do
       end
     end
 
+    describe "all_parent_ids" do
+      let(:expected_data) { [ 4, 3, 2, 1 ] }
+
+      it "returns all parent ids" do
+        # must be exact order for common ancestor
+        expect(node5.all_parent_ids).to eq(expected_data)
+      end
+    end
+
+    describe "self.all_children" do
+      let(:expected_data) { [ node5, node6, node8, node9 ] }
+
+      it "returns all children" do
+        expect(Node.all_children([ 4, 7 ])).to match_array(expected_data)
+      end
+    end
+
     describe "self.all_children_ids" do
-      let(:expected_data) { [ 4, 5, 6, 7, 8 ] }
+      let(:expected_data) { [ 5, 6, 8, 9 ] }
 
       it "returns all children ids" do
-        expect(Node.all_children_ids(Set.new, Set[ 4, 7 ])).to match_array(expected_data)
+        expect(Node.all_children_ids([ 4, 7 ])).to match_array(expected_data)
       end
     end
   end

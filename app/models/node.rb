@@ -3,31 +3,51 @@ class Node < ApplicationRecord
   has_and_belongs_to_many :birds
 
   def all_parents
-    _all_nodes = []
-    _current_node = parent_node
-    while _current_node.present? # stop at the root node
-      _all_nodes.push(_current_node)
-      _current_node = _current_node.parent_node
-    end
-    _all_nodes
+    Node.find(all_parent_ids)
   end
 
-  # HOW TO USE: all_children_ids(nil, node_ids)
-  # 1. move the children to the parents collection
-  # 2. find the children of the parents
-  # 3. return all parents when there are no more children
-  def self.all_children_ids(parent_ids=Set.new, child_ids=Set.new)
-    # remove parent nodes that have been processed from the child nodes
-    child_ids = child_ids - parent_ids
-    # store the child ids in a unique hash
-    parent_ids.merge(child_ids)
-    # find the new child ids
-    child_ids = Set.new(Node.where(parent_id: child_ids.to_a).pluck(:id))
-    if child_ids.empty?
-      # recursive exit
-      parent_ids.to_a
-    else
-      all_children_ids(parent_ids, child_ids)
-    end
+  def all_parent_ids
+    query = <<-SQL
+      WITH Parents AS (
+        -- initialize
+        SELECT id, parent_id
+        FROM nodes
+        WHERE id = #{parent_id}
+        UNION
+        -- recursion
+        SELECT n.id, n.parent_id
+        FROM nodes n INNER JOIN Parents p
+        ON n.id = p.parent_id
+      ) SELECT id FROM Parents
+    SQL
+    Node.sql_ids(query)
+  end
+
+  def self.all_children(node_ids=[])
+    Node.find(self.all_children_ids(node_ids))
+  end
+
+  def self.all_children_ids(node_ids=[])
+    sanitized_ids = node_ids.map(&:to_i).join(",")
+    query = <<-SQL
+      WITH Children AS (
+        -- initialize
+        SELECT DISTINCT id, parent_id
+        FROM nodes
+        WHERE parent_id IN (#{sanitized_ids})
+        UNION
+        -- recursion
+        SELECT DISTINCT n.id, n.parent_id
+        FROM nodes n INNER JOIN Children c
+        ON n.parent_id = c.id
+      ) SELECT id FROM Children
+    SQL
+    sql_ids(query)
+  end
+
+  private
+
+  def self.sql_ids(query)
+    ActiveRecord::Base.connection.execute(query).map { |n| n["id"] }
   end
 end
