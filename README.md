@@ -25,9 +25,8 @@ of the tree from node b to the lowest common ancestor.
 
 The second problem of finding all children for a list of nodes (and subsequently
 the related birds) can be solved by recursively asking "who are your children"
-and returning all unique values when no more children are found. Children that
-have already been processed are removed on each iteration to make sure each
-path is traversed only once. Then all birds are returned with a SQL join query.
+and returning all unique values when no more children are found. Then all birds
+are returned with a SQL join query.
 
 ## Design
 
