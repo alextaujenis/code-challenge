@@ -5,7 +5,6 @@ class CommonAncestorController < ApplicationController
         node_a: Node.find(a),
         node_b: Node.find(b)
       )
-      common_ancestor.run
       render json: common_ancestor.data
     else
       render json: { error: "Required parameter(s) missing: ?a=1&b=2" }

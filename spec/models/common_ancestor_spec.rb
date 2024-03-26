@@ -10,7 +10,6 @@ describe CommonAncestor, type: :model do
     let!(:node_4430546) { Node.create!(id: 4430546, parent_id: 125) }
     let!(:node_5497637) { Node.create!(id: 5497637, parent_id: 4430546) }
     let(:common_ancestor) { CommonAncestor.new(node_a: node_a, node_b: node_b) }
-    before(:each) { common_ancestor.run }
 
     # /common_ancestor?a=5497637&b=2820230 should return
     # {root_id: 130, lowest_common_ancestor: 125, depth: 2}

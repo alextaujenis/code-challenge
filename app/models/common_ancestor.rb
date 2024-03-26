@@ -9,12 +9,10 @@ class CommonAncestor
     @depth = nil
   end
 
-  def run
-    return unless node_a.present? && node_b.present?
-    node_a == node_b ? compute_single_node : compute_multi_node
-  end
-
   def data
+    if node_a.present? && node_b.present?
+      node_a == node_b ? compute_single_node : compute_multi_node
+    end
     { root_id:, lowest_common_ancestor:, depth: }
   end
 
